@@ -2,7 +2,7 @@
 // @name         Notion Invoices Bulk Downloader
 // @name:ru      Notion Invoices Bulk Downloader
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  Adds bulk download for Notion invoices and receipts.
 // @description:ru Массовое скачивание инвойсов и квитанций в Notion.
 // @author       DayDve
@@ -89,6 +89,20 @@
             cursor: pointer; margin: 0;
         }
 
+        /* Year batch selectors (row below the header) */
+        .nir-year-selectors {
+            display: flex; align-items: center; gap: 14px;
+            padding: 8px 0px; flex-wrap: wrap;
+            font-size: 13px; color: var(--c-texSec, #999);
+        }
+        .nir-year-label {
+            display: flex; align-items: center; gap: 4px;
+            cursor: pointer; user-select: none;
+        }
+        .nir-year-label input {
+            cursor: pointer; margin: 0;
+        }
+
         /* Modified Invoice Row: Enables checkbox placement */
         .nir-invoice-row-modified {
             display: flex !important;
@@ -112,6 +126,7 @@
     const STATE = {
         headers: null,
         invoiceMap: {}, // "Month D, YYYY" -> "in_XXXXXX"
+        invoicesByYear: {}, // "YYYY" -> Set("in_XXXXXX")
         rawEvents: [],
         selectedInvoices: new Set(),
         processing: false
@@ -163,6 +178,8 @@
                 const id = m[1];
                 const dateText = formatter.format(new Date(inv.timestamp));
                 STATE.invoiceMap[dateText] = id;
+                const year = new Date(inv.timestamp).getFullYear();
+                (STATE.invoicesByYear[year] = STATE.invoicesByYear[year] || new Set()).add(id);
             }
         });
 
@@ -176,6 +193,7 @@
 
         observerTimer = setInterval(() => {
             injectMassDownloadButton();
+            injectYearSelectors();
 
             // Find invoice rows based on unique styling.
             // NOTE: not binding to the border-bottom color variable (was --ca-regDivCol,
@@ -223,6 +241,7 @@
             }
             updateMassDownloadButtonState();
             syncSelectAllState();
+            syncYearStates();
         };
         checkContainer.appendChild(checkbox);
 
@@ -333,6 +352,66 @@
         selectAll.indeterminate = checked > 0 && checked < total;
     }
 
+    function injectYearSelectors() {
+        if (document.getElementById('nir-year-selectors')) return;
+
+        const years = Object.keys(STATE.invoicesByYear).sort((a, b) => b - a);
+        if (!years.length) return;
+
+        const header = document.querySelector('.nir-invoices-header-flex');
+        if (!header || !header.parentElement) return;
+
+        const container = document.createElement('div');
+        container.id = 'nir-year-selectors';
+        container.className = 'nir-year-selectors';
+
+        years.forEach(year => {
+            const label = document.createElement('label');
+            label.className = 'nir-year-label';
+            label.innerHTML = `<input type="checkbox" data-year="${year}"> ${year}`;
+
+            const cb = label.querySelector('input');
+            cb.onchange = () => {
+                const ids = STATE.invoicesByYear[year];
+                if (!ids) return;
+                ids.forEach(id => {
+                    const box = document.getElementById(`nir-check-${id}`);
+                    if (box) {
+                        box.checked = cb.checked;
+                        if (cb.checked) {
+                            STATE.selectedInvoices.add(id);
+                        } else {
+                            STATE.selectedInvoices.delete(id);
+                        }
+                    }
+                });
+                updateMassDownloadButtonState();
+                syncSelectAllState();
+            };
+
+            container.appendChild(label);
+        });
+
+        header.parentElement.insertBefore(container, header.nextSibling);
+        syncYearStates();
+    }
+
+    function syncYearStates() {
+        document.querySelectorAll('#nir-year-selectors input[data-year]').forEach(cb => {
+            const ids = STATE.invoicesByYear[cb.dataset.year];
+            if (!ids || !ids.size) {
+                cb.checked = false;
+                cb.indeterminate = false;
+                return;
+            }
+            const boxes = [...ids].map(id => document.getElementById(`nir-check-${id}`)).filter(Boolean);
+            const total = boxes.length;
+            const checked = boxes.filter(b => b.checked).length;
+            cb.checked = total > 0 && checked === total;
+            cb.indeterminate = checked > 0 && checked < total;
+        });
+    }
+
     // --- 5. DOWNLOAD LOGIC ---
 
     async function runMassDownload() {
@@ -396,6 +475,7 @@
                 btn.classList.remove('loading');
                 updateMassDownloadButtonState();
                 syncSelectAllState();
+                syncYearStates();
                 queue.forEach(id => {
                     const rowEl = getRowElement(id);
                     if (rowEl) {
