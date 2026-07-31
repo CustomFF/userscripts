@@ -2,7 +2,7 @@
 // @name         Notion Invoices Bulk Downloader
 // @name:ru      Notion Invoices Bulk Downloader
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @description  Adds bulk download for Notion invoices and receipts.
 // @description:ru Массовое скачивание инвойсов и квитанций в Notion.
 // @author       DayDve
@@ -77,6 +77,16 @@
             margin-right: 8px;
             flex-shrink: 0;
             flex-grow: 0;
+        }
+
+        /* Select All checkbox (in the header row) */
+        .nir-select-all-container {
+            display: flex; align-items: center; gap: 6px;
+            margin-inline-start: 12px; user-select: none; cursor: pointer;
+            font-size: 14px; font-weight: 400; color: #ccc; white-space: nowrap;
+        }
+        .nir-select-all-container input {
+            cursor: pointer; margin: 0;
         }
 
         /* Modified Invoice Row: Enables checkbox placement */
@@ -212,6 +222,7 @@
                 STATE.selectedInvoices.delete(invoiceId);
             }
             updateMassDownloadButtonState();
+            syncSelectAllState();
         };
         checkContainer.appendChild(checkbox);
 
@@ -264,6 +275,27 @@
         titleCopy.style.flexShrink = '0';
 
         newContainer.appendChild(titleCopy);
+
+        const selectAll = document.createElement('label');
+        selectAll.className = 'nir-select-all-container';
+        selectAll.innerHTML = '<input type="checkbox" id="nir-select-all"> Select all';
+        const selectAllCheckbox = selectAll.querySelector('input');
+        selectAllCheckbox.onchange = () => {
+            const boxes = document.querySelectorAll('input[id^="nir-check-"]');
+            if (selectAllCheckbox.checked) {
+                boxes.forEach(cb => {
+                    cb.checked = true;
+                    const id = cb.id.replace('nir-check-', '');
+                    if (id) STATE.selectedInvoices.add(id);
+                });
+            } else {
+                boxes.forEach(cb => { cb.checked = false; });
+                STATE.selectedInvoices.clear();
+            }
+            updateMassDownloadButtonState();
+        };
+
+        newContainer.appendChild(selectAll);
         newContainer.appendChild(massBtn);
 
         // Insert the new container before the original title
@@ -287,6 +319,18 @@
         } else {
             btn.classList.remove('active');
         }
+    }
+
+    function syncSelectAllState() {
+        const selectAll = document.getElementById('nir-select-all');
+        if (!selectAll) return;
+
+        const boxes = document.querySelectorAll('input[id^="nir-check-"]');
+        const total = boxes.length;
+        const checked = [...boxes].filter(b => b.checked).length;
+
+        selectAll.checked = total > 0 && checked === total;
+        selectAll.indeterminate = checked > 0 && checked < total;
     }
 
     // --- 5. DOWNLOAD LOGIC ---
@@ -351,6 +395,7 @@
             setTimeout(() => {
                 btn.classList.remove('loading');
                 updateMassDownloadButtonState();
+                syncSelectAllState();
                 queue.forEach(id => {
                     const rowEl = getRowElement(id);
                     if (rowEl) {
