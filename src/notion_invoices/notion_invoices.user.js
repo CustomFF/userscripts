@@ -2,7 +2,7 @@
 // @name         Notion Invoices Bulk Downloader
 // @name:ru      Notion Invoices Bulk Downloader
 // @namespace    http://tampermonkey.net/
-// @version      1.0.5
+// @version      1.0.6
 // @description  Adds bulk download for Notion invoices and receipts.
 // @description:ru Массовое скачивание инвойсов и квитанций в Notion.
 // @author       DayDve
@@ -414,6 +414,28 @@
 
     // --- 5. DOWNLOAD LOGIC ---
 
+    function buildArchiveName() {
+        if (STATE.selectedInvoices.size === 0) return 'Notion_Invoices.zip';
+
+        const years = Object.keys(STATE.invoicesByYear);
+        const totalCount = years.reduce((n, y) => n + STATE.invoicesByYear[y].size, 0);
+        if (STATE.selectedInvoices.size >= totalCount) return 'Notion_Invoices.zip';
+
+        const involvedYears = [];
+        for (const y of years) {
+            const ids = STATE.invoicesByYear[y];
+            const hasSelected = [...ids].some(id => STATE.selectedInvoices.has(id));
+            if (!hasSelected) continue;
+            const allSelected = [...ids].every(id => STATE.selectedInvoices.has(id));
+            if (!allSelected) return 'Notion_Invoices.zip';
+            involvedYears.push(y);
+        }
+        if (!involvedYears.length) return 'Notion_Invoices.zip';
+
+        involvedYears.sort((a, b) => a - b);
+        return `Notion_Invoices_${involvedYears.join('_')}.zip`;
+    }
+
     async function runMassDownload() {
         const btn = document.getElementById('nir-mass-download-btn');
         if (!btn || !btn.classList.contains('active')) return;
@@ -460,7 +482,7 @@
 
             btn.innerHTML = "Packing ZIP...";
             const zipBlob = createZip(filesCollection);
-            saveBlob(zipBlob, `Notion_Invoices.zip`);
+            saveBlob(zipBlob, buildArchiveName());
 
             STATE.selectedInvoices.clear();
 
