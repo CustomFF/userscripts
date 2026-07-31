@@ -2,7 +2,7 @@
 // @name         Notion Invoices Bulk Downloader
 // @name:ru      Notion Invoices Bulk Downloader
 // @namespace    http://tampermonkey.net/
-// @version      1.0.4
+// @version      1.0.5
 // @description  Adds bulk download for Notion invoices and receipts.
 // @description:ru Массовое скачивание инвойсов и квитанций в Notion.
 // @author       DayDve
@@ -490,7 +490,7 @@
 
     // --- CORE API WORKER (Native) ---
     async function processViaNotionAPI(invoiceId, authHeaders) {
-        const notionRes = await fetch('https://www.notion.so/api/v3/getInvoiceData', {
+        const notionRes = await fetch('https://app.notion.com/api/v3/getInvoiceData', {
             method: 'POST', headers: authHeaders, body: JSON.stringify({ type: 'invoice', invoiceId: invoiceId })
         });
         const nJson = await notionRes.json();
