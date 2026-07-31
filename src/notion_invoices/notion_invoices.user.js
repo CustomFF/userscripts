@@ -2,7 +2,7 @@
 // @name         Notion Invoices Bulk Downloader
 // @name:ru      Notion Invoices Bulk Downloader
 // @namespace    http://tampermonkey.net/
-// @version      1.0.6
+// @version      1.0.7
 // @description  Adds bulk download for Notion invoices and receipts.
 // @description:ru Массовое скачивание инвойсов и квитанций в Notion.
 // @author       DayDve
@@ -495,9 +495,6 @@
             // Reset status and checkboxes
             setTimeout(() => {
                 btn.classList.remove('loading');
-                updateMassDownloadButtonState();
-                syncSelectAllState();
-                syncYearStates();
                 queue.forEach(id => {
                     const rowEl = getRowElement(id);
                     if (rowEl) {
@@ -506,6 +503,9 @@
                     const checkbox = document.getElementById(`nir-check-${id}`);
                     if (checkbox) checkbox.checked = false;
                 });
+                updateMassDownloadButtonState();
+                syncSelectAllState();
+                syncYearStates();
             }, 3000);
         }
     }
