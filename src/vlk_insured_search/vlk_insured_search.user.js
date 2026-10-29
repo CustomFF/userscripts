@@ -8,7 +8,7 @@
 // @description:ru Добавляет единое поле Asmens kodas в форму поиска.
 // @description:lt Prideda vieną Asmens kodas laukelį į paieškos formą.
 // @author       DayDve
-// @license      MIT
+// @license      MPL-2.0
 // @icon         https://dpsdr.vlk.lt/img/icons/favicon-32x32.png
 // @match        https://dpsdr.vlk.lt/
 // @grant        none

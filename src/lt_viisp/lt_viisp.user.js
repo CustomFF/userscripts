@@ -8,7 +8,7 @@
 // @description:ru Автоматизация авторизации через Swedbank на госпорталах Литвы.
 // @description:lt Automatizuoja prisijungimą per Swedbank Lietuvos valstybiniuose portaluose.
 // @author       DayDve
-// @license      MIT
+// @license      MPL-2.0
 // @icon         data:image/gif;base64,R0lGODlhIAAgAOMIANMUAMdHBKNZAoBmADN/AE55AOyTGv3OKP///////////////////////////////yH5BAEKAAgALAAAAAAgACAAAAT+ECEyK702Yyw7+WAojmM3fQWRrmrLvqJHDEFt38Kt18NnfgKAcCg0HA4GYY0oFPh+A+bwiAQEglInRYYdBqjHWuFG1G5PXauRmhzQwuWnBOhdH5OCQu6ebMrRRWBhATMBdlUAWj8EQV+CAQApA4dHfnJ0AIIGAT1jBkZ2kIpcAJQAPR9uUY5IV38Te2BXKSE0hwajc4yHPAW0KoaaA7Q/AnabVmIqsWAGqIvMd62SrGyuZ3OrgkhOBaWaQs8yq5QBvnubhp/h2HNjanzmUYhM5u0oXTannvRx7Sc06g2IBUlKChPQmAhg1ocIqn/ucqyT2OxTOmIIdQFLB8mQx00vnwi9QnhBj5QsGDMuSlXw5EOVKi8sQwkCJkwRenqFsMnzBIhfI3uS9BlUqFGjEQAAOw==
 // @match        *://*.migracija.lt/*
 // @match        *://*.sodra.lt/*

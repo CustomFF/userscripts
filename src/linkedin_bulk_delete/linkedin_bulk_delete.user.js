@@ -8,7 +8,7 @@
 // @match        https://www.linkedin.com/notifications/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=linkedin.com
 // @grant        none
-// @license      MIT
+// @license      MPL-2.0
 // @keywords     linkedin, notifications, delete, bulk
 // ==/UserScript==
 
