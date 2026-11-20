@@ -11,6 +11,7 @@
 | ![Before](https://github.com/DayDve/userscripts/blob/master/screenshots/viisp_before.png?raw=true) | ![After](https://github.com/DayDve/userscripts/blob/master/screenshots/viisp_after.png?raw=true) |
 
 ### Функционал
-* Добавляет кнопку прямой авторизации "Auth via SB".
-* Работает на: [Sodra](https://www.sodra.lt), [Migris](https://www.migracija.lt), [Esveikata](https://www.esveikata.lt).
-* Поле ввода Smart-ID на странице банка запоминает последние введенные данные.
+* Добавляет кнопку "Auth via SB": вход через Swedbank сразу, без выбора системы, банка и страниц согласия. Промежуточные страницы проходятся автоматически под заглушкой.
+* Стрелка ▾ на кнопке открывает список сохранённых Swedbank ID. Выбрал ID, и скрипт сам заполняет форму банка: остаётся только подтвердить код на телефоне.
+* ID, asmens kodas (если банк его спрашивает) и способ входа запоминаются, когда входишь в Swedbank вручную. Хранятся до 5 записей, лишние удаляются крестиком в списке.
+* Работает на: [Sodra](https://www.sodra.lt), [Migris](https://www.migracija.lt), [Esveikata](https://www.esveikata.lt) (сразу открывает портал пациента).
