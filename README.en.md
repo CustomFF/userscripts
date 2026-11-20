@@ -16,6 +16,11 @@ Bulk download for Notion invoices and receipts as a ZIP archive.
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/linkedin_bulk_delete/linkedin_bulk_delete.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-EN-blue)](src/linkedin_bulk_delete/README.en.md)
 LinkedIn doesn't allow deleting all notifications at once. This script fixes this annoying oversight.
 
+### 📺 YouTube History Bulk Delete
+[![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/youtube_history_bulk_delete/youtube_history_bulk_delete.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-EN-blue)](src/youtube_history_bulk_delete/README.en.md)
+
+Checkboxes and bulk removal of videos from your YouTube watch history instead of one at a time.
+
 ### 🏦 LT VIISP -> Swedbank Auto
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/lt_viisp/lt_viisp.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-EN-blue)](src/lt_viisp/README.en.md)
 

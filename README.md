@@ -18,6 +18,11 @@
 Linkedin не дает удалить все уведомления разом. Этот скрипт исправляет это досадное недоразумение
 
 
+### 📺 YouTube: Массовое удаление из истории просмотра
+[![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/youtube_history_bulk_delete/youtube_history_bulk_delete.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-RU-blue)](src/youtube_history_bulk_delete/README.md)
+
+Чекбоксы и пакетное удаление видео из истории просмотра YouTube вместо удаления по одному.
+
 ### 🏦 LT VIISP -> Swedbank Auto
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/lt_viisp/lt_viisp.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-RU-blue)](src/lt_viisp/README.md)
 
