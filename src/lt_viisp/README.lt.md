@@ -1,5 +1,6 @@
+[![Русский](https://img.shields.io/badge/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-blue?style=flat&logo=readme&logoColor=white)](README.md) [![English](https://img.shields.io/badge/English-blue?style=flat&logo=readme&logoColor=white)](README.en.md) [![Visi skriptai](https://img.shields.io/badge/Visi%20skriptai-blue?style=flat&logo=readme&logoColor=white)](../../README.md)
+
 # LT VIISP -> Swedbank Auto
-[![RU](https://img.shields.io/badge/lang-RU-lightgrey)](README.md) [![EN](https://img.shields.io/badge/lang-EN-lightgrey)](README.en.md) [![LT](https://img.shields.io/badge/lang-LT-blue)](#) [![Back](https://img.shields.io/badge/Back-List-black)](../../README.md)
 
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](lt_viisp.user.js?raw=1)
 

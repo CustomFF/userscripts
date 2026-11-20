@@ -1,5 +1,6 @@
+[![English](https://img.shields.io/badge/English-blue?style=flat&logo=readme&logoColor=white)](README.en.md) [![Все скрипты](https://img.shields.io/badge/%D0%92%D1%81%D0%B5%20%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-blue?style=flat&logo=readme&logoColor=white)](../../README.md)
+
 # LinkedIn Notifications Bulk Delete
-[![RU](https://img.shields.io/badge/lang-RU-blue)](#) [![EN](https://img.shields.io/badge/lang-EN-lightgrey)](README.en.md) [![Back](https://img.shields.io/badge/Back-List-black)](../../README.md)
 
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](linkedin_bulk_delete.user.js?raw=1)
 

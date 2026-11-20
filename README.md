@@ -1,5 +1,6 @@
+[![English](https://img.shields.io/badge/English-blue?style=flat&logo=readme&logoColor=white)](README.en.md)
+
 # My Userscripts
-[![RU](https://img.shields.io/badge/lang-RU-blue)](#) [![EN](https://img.shields.io/badge/lang-EN-lightgrey)](README.en.md)
 
 Набор моих самописных юзерскриптов. Список пополняется по мере необходимости.  
 Скрипты также можно найти на [GreasyFork](https://greasyfork.org/).
