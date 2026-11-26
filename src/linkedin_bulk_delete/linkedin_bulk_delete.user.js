@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LinkedIn Notifications Bulk Delete
 // @name:ru      LinkedIn: Массовое удаление уведомлений
-// @version      1.6
+// @version      1.6.1
 // @description  Bulk delete LinkedIn notifications
 // @description:ru Массовое удаление уведомлений в LinkedIn
 // @author       DayDve
@@ -110,24 +110,31 @@
         return true;
     };
 
-    const deleteCard = async (card) => {
-        const more = card.querySelector(MORE);
-        if (!more) return;
-        let ok = false;
-        try { ok = await deleteViaApi(more); } catch (e) { ok = false; }
-        if (!ok && !await deleteViaMenu(more)) return;
+    const hideCard = (card) => {
         setupElement(card, {}, { transition: 'opacity 0.4s ease', opacity: '0' });
-        await sleep(400);
-        if (card.isConnected) card.style.display = 'none';
+        setTimeout(() => { card.style.display = 'none'; }, 400);
     };
 
+    // API requests go out a few at a time in parallel; only the cards they failed for are
+    // deleted one by one through the menu.
     const deleteCards = async (checks) => {
         if (busy) return;
         busy = true;
-        for (const chk of checks) {
-            const card = cardOf(chk);
-            if (card && card.isConnected && card.style.display !== 'none') await deleteCard(card);
+        const cards = [...new Set(checks.map(cardOf))]
+            .filter(c => c && c.isConnected && c.style.display !== 'none' && c.querySelector(MORE));
+        const failed = [];
+        for (let i = 0; i < cards.length; i += 5) {
+            await Promise.all(cards.slice(i, i + 5).map(async card => {
+                let ok = false;
+                try { ok = await deleteViaApi(card.querySelector(MORE)); } catch (e) { ok = false; }
+                if (ok) hideCard(card); else failed.push(card);
+            }));
         }
+        for (const card of failed) {
+            console.warn('[LinkedIn Bulk Delete] API delete failed, using the menu:', card.textContent.trim().slice(0, 60));
+            if (await deleteViaMenu(card.querySelector(MORE))) hideCard(card);
+        }
+        await sleep(400);
         busy = false;
         updateButtonState();
     };
