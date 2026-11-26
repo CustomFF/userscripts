@@ -16,4 +16,5 @@ Adds checkboxes to select multiple notifications for removal.
 ### Features
 * Adds selection checkboxes to the left of notifications.
 * Delete selected or all visible notifications with a single button.
+* The «Hide» / «Bulk delete» button hides and shows the panel and checkboxes; the choice is remembered.
 * Works without page reload (uses LinkedIn internal logic).
