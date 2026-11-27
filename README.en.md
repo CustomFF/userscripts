@@ -16,6 +16,11 @@ Bulk download for Notion invoices and receipts as a ZIP archive.
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/linkedin_bulk_delete/linkedin_bulk_delete.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-EN-blue)](src/linkedin_bulk_delete/README.en.md)
 LinkedIn doesn't allow deleting all notifications at once. This script fixes this annoying oversight.
 
+### ⚙️ LinkedIn Settings Overview
+[![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/linkedin_settings/linkedin_settings.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-EN-blue)](src/linkedin_settings/README.en.md)
+
+All LinkedIn settings on one page instead of a hundred separate ones: bulk changes, one-click privacy lockdown, notifications as a table.
+
 ### 📺 YouTube History Bulk Delete
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/youtube_history_bulk_delete/youtube_history_bulk_delete.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-EN-blue)](src/youtube_history_bulk_delete/README.en.md)
 

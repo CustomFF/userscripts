@@ -18,6 +18,11 @@
 Linkedin не дает удалить все уведомления разом. Этот скрипт исправляет это досадное недоразумение
 
 
+### ⚙️ LinkedIn: Все настройки на одной странице
+[![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/linkedin_settings/linkedin_settings.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-RU-blue)](src/linkedin_settings/README.md)
+
+Все настройки LinkedIn на одной странице вместо сотни отдельных: массовые изменения, отключение сбора данных одной кнопкой, уведомления таблицей.
+
 ### 📺 YouTube: Массовое удаление из истории просмотра
 [![Install](https://img.shields.io/badge/Install-Direct-brightgreen)](src/youtube_history_bulk_delete/youtube_history_bulk_delete.user.js?raw=1) [![Details](https://img.shields.io/badge/Details-RU-blue)](src/youtube_history_bulk_delete/README.md)
 
